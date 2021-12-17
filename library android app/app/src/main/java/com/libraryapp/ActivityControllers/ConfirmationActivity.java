@@ -33,7 +33,7 @@ public class ConfirmationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         userId = intent.getStringExtra("userInfo");
-        books = intent.getStringExtra("books").split(",");
+        books = intent.getStringExtra("books").split(";");
         for(String x : books) {
             x = x.trim();
         }

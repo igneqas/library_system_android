@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         String itemSelected = "";
         for(int i=0; i <booksList.getCount();i++) {
             if (booksList.isItemChecked(i)) {
-                itemSelected += booksList.getItemAtPosition(i) + ",";
+                itemSelected += booksList.getItemAtPosition(i) + ";";
             }
         }
         Intent intent = new Intent(MainActivity.this, ConfirmationActivity.class);
