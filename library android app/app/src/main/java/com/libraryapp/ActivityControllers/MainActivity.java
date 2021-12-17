@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String userId;
     ListView booksList;
+    ArrayAdapter<Books> arrayAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         books.sort(Comparator.comparing(Books::getId));
-                        ArrayAdapter<Books> arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_multiple_choice, books);
+                        arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_multiple_choice, books);
                         booksList.setAdapter(arrayAdapter);
 
                         booksList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -101,6 +102,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
+        MenuItem search = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) search.getActionView();
+        searchView.setQueryHint("Search for a book");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                arrayAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         return true;
     }
 

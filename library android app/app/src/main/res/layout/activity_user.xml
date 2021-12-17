@@ -132,7 +132,7 @@
                         android:layout_marginStart="16dp"/>
                 <ExpandableListView
                         android:layout_width="406dp"
-                        android:layout_height="450dp"
+                        android:layout_height="600dp"
                         android:id="@+id/order_list"
                         app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="560dp" android:layout_marginLeft="16dp"

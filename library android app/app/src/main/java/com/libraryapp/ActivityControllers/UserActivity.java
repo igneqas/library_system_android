@@ -81,15 +81,20 @@ public class UserActivity extends AppCompatActivity {
                     JSONArray orders = new JSONArray(finalResponse1);
                     for(int i=0;i<orders.length();i++){
                         JSONObject order = orders.getJSONObject(i);
+                        System.out.println(order);
                         listGroup.add(order.getString("orderID") + " : " + order.getString("issueDate").substring(0,10));
                         System.out.println(order.getString("orderID") + " : " + order.getString("issueDate").substring(0,10));
                         ArrayList<String> tempBooks = new ArrayList<>();
                         JSONArray books = order.getJSONArray("booksList");
                         for(int j=0;j<books.length();j++) {
                             JSONObject book = books.getJSONObject(j);
-                            String author = book.getJSONArray("authorsList").getJSONObject(0).getString("authorName");
-                            tempBooks.add(book.getString("title") + ", " + author);
-                            System.out.println(book.getString("title") + ", " + author);
+                            String authorList = "";
+                            JSONArray authors = book.getJSONArray("authorsList");
+                            for(int x=0; x<authors.length();x++) {
+                                authorList += ", " + authors.getJSONObject(x).getString("authorName");
+                            }
+                            tempBooks.add(book.getString("title") +  authorList);
+                            System.out.println(book.getString("title") + authorList);
                         }
                         listChild.put(listGroup.get(i), tempBooks);
                     }

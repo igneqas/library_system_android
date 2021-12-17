@@ -2,6 +2,7 @@ package com.libraryapp.Utilities;
 
 public class Constants {
     public final static String ADDRESS = "http:192.168.8.127:8080/rest";//192.168.66.253
+    //public final static String ADDRESS = "http:192.168.66.253:8080/rest";
     public final static String LOGIN_URL = ADDRESS + "/login";
     public final static String GET_ALL_BOOKS_URL = ADDRESS + "/allBooks";
     public final static String GET_USER_URL = ADDRESS + "/getUser/";
