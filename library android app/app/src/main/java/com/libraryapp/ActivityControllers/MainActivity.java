@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import com.libraryapp.R;
 import com.libraryapp.Utilities.RESTController;
+import com.libraryapp.domain.Authors;
 import com.libraryapp.domain.Books;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         userId = intent.getStringExtra("userInfo");
-        //System.out.println(userId);
 
         booksList = findViewById(R.id.booksList);
         Button confirm = findViewById(R.id.confirmB);
@@ -69,8 +69,13 @@ public class MainActivity extends AppCompatActivity {
                         for(int i = 0; i < obj.length(); i++) {
                             int id = obj.getJSONObject(i).getInt("id");
                             String title = obj.getJSONObject(i).getString("title");
+                            String authorList = "";
+                            JSONArray authors = obj.getJSONObject(i).getJSONArray("authorsList");
+                            for(int x=0; x<authors.length();x++) {
+                                authorList += ",  " + authors.getJSONObject(x).getString("authorName");
+                            }
                             if(obj.getJSONObject(i).getString("availability").equals("AVAILABLE")) {
-                                books.add(new Books(id, title));
+                                books.add(new Books(id, title, authorList));
                             }
                         }
                         books.sort(Comparator.comparing(Books::getId));
@@ -140,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
         for(int i=0; i <booksList.getCount();i++) {
             if (booksList.isItemChecked(i)) {
                 itemSelected += booksList.getItemAtPosition(i) + ",";
-                //itemSelected += booksList.getItemAtPosition(i).toString().split(":")[0] + ',';
             }
         }
         Intent intent = new Intent(MainActivity.this, ConfirmationActivity.class);

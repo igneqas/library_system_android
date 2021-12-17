@@ -14,6 +14,7 @@ public class Books {
     private Availability availability;
 
     private List<Orders> bookOrders;
+    private String authors;
 
     public Books() {
     }
@@ -27,9 +28,10 @@ public class Books {
         this.bookOrders = bookOrders;
     }
 
-    public Books(int id, String title) {
+    public Books(int id, String title, String authors) {
         this.id = id;
         this.title = title;
+        this.authors = authors;
     }
 
     public Books(String title, Availability availability) {
@@ -87,6 +89,6 @@ public class Books {
 
     @Override
     public String toString() {
-        return  id + " : " + title;
+        return  id + " : " + title + authors;
     }
 }
